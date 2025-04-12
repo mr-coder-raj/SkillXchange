@@ -1,19 +1,19 @@
 "use client"
 
-import { useUser } from '@clerk/nextjs';
 import { useState, useEffect } from 'react';
 import { useCreateChatClient, Chat, Channel, ChannelHeader, MessageInput, MessageList, Thread, Window } from 'stream-chat-react';
+import { useUser } from '@clerk/nextjs';
+
 import 'stream-chat-react/dist/css/v2/index.css';
 
-// your Stream app information
-const apiKey = 'd4y9q7tsmern';
-// const userId = 'user_2tZyPbcf8F0Gxpmf0JB36Ex0K2u';
+const apiKey = 'qshfzk7b6unm';
+// const userId = 'user_2vaiLRJDpeo90rEFEDRzkCw6Q6Q';
 // const userName = 'Raj';
-const userToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNlcl8ydFp5UGJjZjhGMEd4cG1mMEpCMzZFeDBLMnUifQ.nmz7WuXyxxGr_4OFdEsb1ca1ymNSQgLPmX_z0t2MNvg';
+const userToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNlcl8ydmFpTFJKRHBlbzkwckVGRURSemtDdzZRNlEifQ.F14PFfGAmnhPTbM6IBVC2N7GLsrPhQdRwKp7xeIegrE';
 
 
 export default function ChatForum({ slug }) {
-    const { isLoaded, clerkUser } = useUser()
+    const { isLoaded, clerkUser } = useUser();
     const [user, setuser] = useState()
 
     useEffect(() => {
@@ -27,16 +27,17 @@ export default function ChatForum({ slug }) {
             };
             setuser(user)
         }
-
     }, [isLoaded])
+
 
 
     function toTitleCase(str) {
         return str.replace(
             /\b[a-z]/g,
-            (char) => char.toUppercase()
+            (char) => char.toUpperCase()
         )
     }
+
     const [channel, setChannel] = useState();
     const client = useCreateChatClient({
         apiKey,
@@ -49,7 +50,7 @@ export default function ChatForum({ slug }) {
 
         const channel = client.channel('messaging', slug, {
             image: 'https://getstream.io/random_png/?name=react',
-            name: toTitleCase(slug.replace(/-/g, " ")) + ' Discussion',
+            name: toTitleCase(slug.replace(/-/g, " ")) + "Discussion",
             members: [userId],
         });
 

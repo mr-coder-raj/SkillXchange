@@ -8,37 +8,37 @@ const topics = [
     text: 'Python',
     img: '/python.png',
     desc: 'Let’s discuss everything related to Python.',
-    slug: 'Python',
+    slug: 'PythonNew',
   },
   {
     text: 'JavaScript',
     img: '/javascript.png',
     desc: 'A place to talk about all things JavaScript.',
-    slug: 'JS',
+    slug: 'JSNew',
   },
   {
     text: 'React',
     img: '/react.png',
     desc: 'Discuss React.js, React Native, and related technologies.',
-    slug: 'React',
+    slug: 'ReactNew',
   },
   {
     text: 'Node.js',
     img: '/nodejs.png',
     desc: 'Backend JavaScript development with Node.js.',
-    slug: 'Node',
+    slug: 'NodeNew',
   },
   {
     text: 'HTML/CSS',
     img: '/htmlcss.png',
     desc: 'Front-end development with HTML and CSS.',
-    slug: 'HTMLCSS',
+    slug: 'HTMLCSSNew',
   },
   {
     text: 'Data Science',
     img: '/datascience.png',
     desc: 'Discussions on data analysis, machine learning, and AI.',
-    slug: 'DataScience',
+    slug: 'DataScienceNew',
   },
 ];
 

@@ -46,7 +46,7 @@ export default function ChatUI() {
       <div className="flex items-center justify-between p-4 bg-white shadow-md">
         <div className="flex items-center gap-4">
           <img src="/user.jpg" alt="User" className="w-10 h-10 rounded-full border-2 border-indigo-500" />
-          <span className="font-bold text-gray-800 text-lg">Cristiano Ronaldo</span>
+          <span className="font-bold text-gray-800 text-lg">Your Assistant</span>
         </div>
         <div className="flex gap-4 text-indigo-500 text-xl">
           <FiPhone className="cursor-pointer hover:text-indigo-700" />

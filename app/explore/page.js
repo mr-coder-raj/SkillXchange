@@ -41,7 +41,7 @@ const ExploreSkillXChange = () => {
     return (
         <section className="min-h-screen bg-gradient-to-br from-purple-800 to-indigo-900 text-white px-6 py-20 pt32">
             <div className="max-w-6xl mx-auto">
-                <h1 className="text-5xl font-bold mb-10 text-center text-white drop-shadow-xl">Explore SkillXchange</h1>
+                <h1 className="text-5xl font-bold mb-10 text-center text-white drop-shadow-xl">Explore SpeakSpace</h1>
 
                 <div className="flex gap-4 max-w-3xl mx-auto relative">
                     <input
@@ -78,15 +78,7 @@ const ExploreSkillXChange = () => {
                             Forums
                         </div>
                     </Link>
-                    <div className="bg-blue-700 hover:bg-blue-900 p-4 rounded-xl shadow-lg text-center font-semibold cursor-pointer transition-all duration-300">
-                        Connect
-                    </div>
-                    <div className="bg-indigo-700 hover:bg-indigo-900 p-4 rounded-xl shadow-lg text-center font-semibold cursor-pointer transition-all duration-300">
-                        Video Chat
-                    </div>
-                    <div className="bg-cyan-700 hover:bg-cyan-900 p-4 rounded-xl shadow-lg text-center font-semibold cursor-pointer transition-all duration-300">
-                        Feedbacks & Ratings
-                    </div>
+                    
                 </div>
 
                 <div className="mt-16 bg-white text-gray-800 p-8 rounded-xl shadow-2xl">
