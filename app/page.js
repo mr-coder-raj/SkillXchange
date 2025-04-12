@@ -20,7 +20,7 @@ export default function Home() {
           <p className="text-lg md:text-2xl mb-8">
             Space to grow, learn and succeed!
           </p>
-          <Link href="/explore">
+          <Link href="/forums">
             <button className="bg-white text-purple-700 py-3 px-8 rounded-full font-semibold hover:bg-gray-100 transition-colors duration-300">
               Get Started
             </button>
@@ -98,7 +98,7 @@ export default function Home() {
       <section className="relative bg-gradient-to-br from-[#f0f4ff] to-white py-24 overflow-hidden">
         <div className="absolute top-0 left-0 w-96 h-96 bg-purple-100 rounded-full blur-[120px] opacity-30 -z-10"></div>
         <div className="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
-          <Image src="/practice.jpg" width={450} height={450} alt="Live GD Practice" className="rounded-3xl shadow-2xl border border-white/40 backdrop-blur-md" />
+          <Image src="/GD.png" width={450} height={550} alt="Live GD Practice" className="rounded-3xl shadow-2xl border border-white/40 backdrop-blur-md" />
           <div>
             <h2 className="text-5xl font-extrabold text-gray-900 mb-6 leading-tight">
               Practice <span className="text-indigo-600">Live</span>
@@ -140,7 +140,7 @@ export default function Home() {
               </button>
             </Link>
           </div>
-          <Image src="/feedback.jpg" width={450} height={450} alt="AI Feedback" className="rounded-3xl shadow-2xl border border-white/40 backdrop-blur-md" />
+          <Image src="/FB.jpg" width={450} height={450} alt="AI Feedback" className="rounded-3xl shadow-2xl border border-white/40 backdrop-blur-md" />
         </div>
       </section>
 
@@ -150,7 +150,7 @@ export default function Home() {
       <section className="relative bg-gradient-to-br from-[#f6f8ff] to-white py-24 overflow-hidden">
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-100 rounded-full blur-[100px] opacity-30 -z-10"></div>
         <div className="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
-          <Image src="/progress.jpg" width={450} height={450} alt="Progress Tracking" className="rounded-3xl shadow-2xl border border-white/40 backdrop-blur-md" />
+          <Image src="/Growth.jpg" width={450} height={450} alt="Progress Tracking" className="rounded-3xl shadow-2xl border border-white/40 backdrop-blur-md" />
           <div>
             <h2 className="text-5xl font-extrabold text-gray-900 mb-6 leading-tight">
               Track <span className="text-indigo-600">Your Growth</span>
@@ -199,10 +199,10 @@ export default function Home() {
         </div>
 
       </footer>
-      
+
 
     </div>
-    
+
   );
 }
 

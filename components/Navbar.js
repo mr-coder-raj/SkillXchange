@@ -11,7 +11,7 @@ import { AnimatePresence, motion } from "framer-motion";
 
 export default function Navbar() {
   // const user = useUser();
-  // console.log(user.user);
+  // console.log(user.user?.id);
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
@@ -27,15 +27,15 @@ export default function Navbar() {
 
   const navLinks = [
     { name: "Home", href: "/" },
-    { name: "Explore", href: "/explore" },
+    { name: "Explore", href: "/forums" },
     { name: "About", href: "/about" },
-    { name: "Assistant", href: "/chat" },
-    { name: "Your Profile", href: "/yourprofile" },
+    // { name: "Assistant", href: "/chat" },
+    { name: "Dashboard", href: "/dashboard" },
   ];
 
   return (
     <nav
-      className={`w-full z-50 transition-all duration-300 
+      className={` w-full z-50 transition-all duration-300 
         ${isScrolled ? "backdrop-blur-md bg-gray-900/70 shadow-md" : "bg-gray-900"}
         font-sans`}
     >

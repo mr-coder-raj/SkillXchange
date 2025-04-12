@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { BookOpen, Users, Brain } from 'lucide-react';
 
 const topics = [
   {
@@ -42,12 +43,23 @@ const topics = [
   },
 ];
 
+const resources = [
+  { title: 'Interview Tips', icon: <BookOpen className="w-8 h-8 text-indigo-700" /> },
+  { title: 'Resume Builder', icon: <Users className="w-8 h-8 text-indigo-700" /> },
+  { title: 'Soft Skills Guide', icon: <Brain className="w-8 h-8 text-indigo-700" /> },
+];
+
 const Forums = () => {
   return (
     <div className="bg-gradient-to-br from-indigo-50 to-white py-20 min-h-screen pt-32">
       <div className="container mx-auto px-4">
-        <h1 className="text-5xl font-bold text-center mb-16 text-gray-800 drop-shadow-sm">Discussion Forums</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Header */}
+        <header className="text-5xl font-extrabold text-blue-800 mb-8 text-center">
+          🌐 Explore SpeakSpace
+        </header>
+
+        {/* Forum Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
           {topics.map((topic) => (
             <div
               key={topic.slug}
@@ -70,6 +82,35 @@ const Forums = () => {
             </div>
           ))}
         </div>
+
+        {/* Mock Interviews Section */}
+        <section className="mb-24">
+          <div className="bg-gradient-to-r from-indigo-200 to-indigo-300 p-10 rounded-3xl shadow-2xl text-center max-w-4xl mx-auto">
+            <h2 className="text-3xl font-semibold text-indigo-900 mb-4">🎤 Mock Interviews</h2>
+            <p className="text-gray-800 mb-6 text-md">
+              Practice real-time mock interviews with peers or mentors. Boost your confidence, improve communication, and get feedback.
+            </p>
+            <Button className="bg-indigo-700 hover:bg-indigo-900 text-white px-8 py-3 rounded-full text-sm shadow-lg">
+              Start a Mock Interview
+            </Button>
+          </div>
+        </section>
+
+        {/* Resources Section */}
+        <section>
+          <h2 className="text-3xl font-semibold text-center text-indigo-900 mb-10">📚 Premium Resources</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {resources.map((res, index) => (
+              <div
+                key={index}
+                className="bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center gap-4"
+              >
+                <div className="p-3 bg-indigo-100 rounded-full">{res.icon}</div>
+                <h3 className="text-lg font-semibold text-gray-800">{res.title}</h3>
+              </div>
+            ))}
+          </div>
+        </section>
       </div>
     </div>
   );
