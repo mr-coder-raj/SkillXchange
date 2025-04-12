@@ -2,6 +2,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { ClerkProvider, SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs'
+import AssistantWidget from "@/components/AssistantWidget";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,6 +27,7 @@ export default function RootLayout({ children }) {
         <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
           <Navbar />
           {children}
+          <AssistantWidget />
         </body>
       </html>
     </ClerkProvider>

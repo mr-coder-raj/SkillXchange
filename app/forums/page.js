@@ -6,40 +6,40 @@ import { BookOpen, Users, Brain } from 'lucide-react';
 
 const topics = [
   {
-    text: 'Python',
-    img: '/python.png',
+    text: 'DSA',
+    img: '/DSA.png',
     desc: 'Let’s discuss everything related to Python.',
-    slug: 'PythonNew',
+    slug: 'DSA',
   },
   {
-    text: 'JavaScript',
-    img: '/javascript.png',
+    text: 'Development',
+    img: '/DEV.png',
     desc: 'A place to talk about all things JavaScript.',
-    slug: 'JSNew',
+    slug: 'Development',
   },
   {
-    text: 'React',
-    img: '/react.png',
+    text: 'Artificial Intelligence',
+    img: '/AI.png',
     desc: 'Discuss React.js, React Native, and related technologies.',
-    slug: 'ReactNew',
+    slug: 'AI',
   },
   {
-    text: 'Node.js',
-    img: '/nodejs.png',
+    text: 'Marketing',
+    img: '/MAR.png',
     desc: 'Backend JavaScript development with Node.js.',
-    slug: 'NodeNew',
+    slug: 'Marketing',
   },
   {
-    text: 'HTML/CSS',
-    img: '/htmlcss.png',
+    text: 'Startups',
+    img: '/SU.png',
     desc: 'Front-end development with HTML and CSS.',
-    slug: 'HTMLCSSNew',
+    slug: 'Startups',
   },
   {
-    text: 'Data Science',
-    img: '/datascience.png',
+    text: 'Blockchain',
+    img: '/BC.png',
     desc: 'Discussions on data analysis, machine learning, and AI.',
-    slug: 'DataScienceNew',
+    slug: 'BlockChain',
   },
 ];
 
@@ -86,13 +86,14 @@ const Forums = () => {
         {/* Mock Interviews Section */}
         <section className="mb-24">
           <div className="bg-gradient-to-r from-indigo-200 to-indigo-300 p-10 rounded-3xl shadow-2xl text-center max-w-4xl mx-auto">
-            <h2 className="text-3xl font-semibold text-indigo-900 mb-4">🎤 Mock Interviews</h2>
+            <button>
+            <h2 className="text-3xl font-semibold text-indigo-900 mb-4">🎤 Mock Interviews</h2></button>
             <p className="text-gray-800 mb-6 text-md">
               Practice real-time mock interviews with peers or mentors. Boost your confidence, improve communication, and get feedback.
-            </p>
+            </p><Link href="/videochat">
             <Button className="bg-indigo-700 hover:bg-indigo-900 text-white px-8 py-3 rounded-full text-sm shadow-lg">
               Start a Mock Interview
-            </Button>
+            </Button></Link>
           </div>
         </section>
 

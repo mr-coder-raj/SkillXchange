@@ -1,19 +1,16 @@
-"use client"
+"use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import { MessageCircle } from "lucide-react";
 
-export default function AssistantWidget() {
+
+export default function AssistantBot() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState([
     { role: "assistant", content: "Hi! How can I help you today?" },
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const [iconPosition, setIconPosition] = useState(100);
-  const dragging = useRef(false);
-  const startY = useRef(0);
-  const startTop = useRef(0);
 
   const handleSend = async () => {
     if (!input.trim()) return;
@@ -45,54 +42,26 @@ export default function AssistantWidget() {
     setLoading(false);
   };
 
-  const handleMouseDown = (e) => {
-    dragging.current = true;
-    startY.current = e.clientY;
-    startTop.current = iconPosition;
-  };
-
-  const handleMouseMove = (e) => {
-    if (!dragging.current) return;
-    const deltaY = e.clientY - startY.current;
-    const newY = Math.min(Math.max(startTop.current + deltaY, 20), window.innerHeight - 100);
-    setIconPosition(newY);
-  };
-
-  const handleMouseUp = () => {
-    dragging.current = false;
-  };
-
-  useEffect(() => {
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mouseup", handleMouseUp);
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("mouseup", handleMouseUp);
-    };
-  }, []);
-
   return (
     <>
       {/* Chat Box */}
       {open && (
         <div
-          className="fixed right-6 z-50 w-96 max-w-sm bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden"
-          style={{ bottom: `${window.innerHeight - iconPosition - 60}px` }}
+          className="fixed bottom-24 right-6 z-50 w-96 max-w-sm bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden"
         >
           <div className="bg-indigo-600 text-white px-4 py-3 font-bold flex justify-between items-center">
             SpeakSpace Assistant
             <button onClick={() => setOpen(false)} className="text-white">✕</button>
           </div>
 
-          <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-50">
+          <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-50 max-h-80">
             {messages.map((msg, i) => (
               <div
                 key={i}
-                className={`p-3 max-w-[80%] text-sm rounded-xl ${
-                  msg.role === "assistant"
+                className={`p-3 max-w-[80%] text-sm rounded-xl ${msg.role === "assistant"
                     ? "bg-white text-left text-gray-700 shadow border"
                     : "bg-indigo-100 text-right ml-auto"
-                }`}
+                  }`}
               >
                 {msg.content}
               </div>
@@ -124,10 +93,8 @@ export default function AssistantWidget() {
 
       {/* Assistant Icon */}
       <button
-        onMouseDown={handleMouseDown}
         onClick={() => setOpen(!open)}
-        className="fixed z-50 bg-indigo-600 text-white p-4 rounded-full shadow-xl hover:scale-105 transition-transform"
-        style={{ right: "24px", top: `${iconPosition}px` }}
+        className="fixed bottom-6 right-6 z-50 bg-indigo-600 text-white p-4 rounded-full shadow-xl hover:scale-105 transition-transform"
         aria-label="Assistant"
       >
         <MessageCircle className="w-5 h-5" />

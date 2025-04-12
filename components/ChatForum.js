@@ -35,7 +35,7 @@ const ChatForum = ({ clerkUser, slug }) => {
 
         const channel = client.channel('messaging', slug, {
             image: 'https://getstream.io/random_png/?name=react',
-            name: capitalize(slug) + "Discussion",
+            name: capitalize(slug) + " Discussion",
             // members: [userId],
         });
 

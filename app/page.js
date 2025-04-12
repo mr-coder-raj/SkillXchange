@@ -180,7 +180,7 @@ export default function Home() {
           <p className="text-2xl text-gray-600 max-w-2xl mx-auto">
             Taking a skills inventory aligns your team’s strengths and roles to enhance productivity and drive success.
           </p>
-          <Link href="/explore">
+          <Link href="/forums">
             <button className="mt-8 bg-indigo-600 hover:bg-indigo-800 text-white px-8 py-4 rounded-full font-semibold text-lg shadow-lg transition-all duration-300">
               Get Started
             </button>
@@ -193,7 +193,7 @@ export default function Home() {
 
 
       <footer className="bg-gray-900 text-white py-5 text-center flex justify-around items-center">
-        <p>&copy; {new Date().getFullYear()} SkillXChange. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} SpeakSpace. All rights reserved.</p>
         <div className="cursor-pointer">
           <Image src="/image.png" width={250} height={60} alt='' className='rounded-full mr-2' />
         </div>
