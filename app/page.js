@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from 'next/link';
 import Head from 'next/head';
+import AssistantWidget from "@/components/AssistantWidget";
 
 export default function Home() {
   return (
@@ -97,8 +98,8 @@ export default function Home() {
 
       <section className="relative bg-gradient-to-br from-[#f0f4ff] to-white py-24 overflow-hidden">
         <div className="absolute top-0 left-0 w-96 h-96 bg-purple-100 rounded-full blur-[120px] opacity-30 -z-10"></div>
-        <div className="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
-          <Image src="/GD.png" width={450} height={550} alt="Live GD Practice" className="rounded-3xl shadow-2xl border border-white/40 backdrop-blur-md" />
+        <div className="max-w-6xl mx-auto px-6 flex flex-col lg:grid lg:grid-cols-2 gap-16 items-center text-center lg:text-left">
+          <Image src="/GD.png" width={450} height={550} alt="Live GD Practice" className="rounded-3xl shadow-2xl border border-white/40 backdrop-blur-md mx-auto" />
           <div>
             <h2 className="text-5xl font-extrabold text-gray-900 mb-6 leading-tight">
               Practice <span className="text-indigo-600">Live</span>
@@ -107,7 +108,7 @@ export default function Home() {
               SpeakSpace lets you practice real-time Group Discussions and Interviews with actual participants, evaluators, and moderators to mimic real-world settings.
             </p>
             <Link href="/practice">
-              <button className="mt-8 inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-full shadow-lg transition-all duration-300">
+              <button className="mt-8 inline-flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-full shadow-lg transition-all duration-300">
                 Start Practicing
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -118,12 +119,15 @@ export default function Home() {
         </div>
       </section>
 
+
+
       <div className="h-[1px] bg-gray-200"></div>
 
       {/* Section 2: AI Feedback */}
       <section className="relative bg-gradient-to-br from-white to-[#f5f7ff] py-24 overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-100 rounded-full blur-[100px] opacity-30 -z-10"></div>
-        <div className="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+        <div className="max-w-6xl mx-auto px-6 flex flex-col lg:grid lg:grid-cols-2 gap-16 items-center text-center lg:text-left">
+          <Image src="/FB.jpg" width={450} height={450} alt="AI Feedback" className="rounded-3xl shadow-2xl border border-white/40 backdrop-blur-md mx-auto" />
           <div>
             <h2 className="text-5xl font-extrabold text-gray-900 mb-6 leading-tight">
               Real-Time <span className="text-indigo-600">Feedback</span>
@@ -132,7 +136,7 @@ export default function Home() {
               Receive instant feedback from evaluators and AI on confidence, logic, and communication skills — helping you improve with each session.
             </p>
             <Link href="/feedback">
-              <button className="mt-8 inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-full shadow-lg transition-all duration-300">
+              <button className="mt-8 inline-flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-full shadow-lg transition-all duration-300">
                 View Feedback
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -140,17 +144,18 @@ export default function Home() {
               </button>
             </Link>
           </div>
-          <Image src="/FB.jpg" width={450} height={450} alt="AI Feedback" className="rounded-3xl shadow-2xl border border-white/40 backdrop-blur-md" />
         </div>
       </section>
+
+
 
       <div className="h-[1px] bg-gray-200"></div>
 
       {/* Section 3: Track Progress */}
       <section className="relative bg-gradient-to-br from-[#f6f8ff] to-white py-24 overflow-hidden">
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-100 rounded-full blur-[100px] opacity-30 -z-10"></div>
-        <div className="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
-          <Image src="/Growth.jpg" width={450} height={450} alt="Progress Tracking" className="rounded-3xl shadow-2xl border border-white/40 backdrop-blur-md" />
+        <div className="max-w-6xl mx-auto px-6 flex flex-col lg:grid lg:grid-cols-2 gap-16 items-center text-center lg:text-left">
+          <Image src="/Growth.jpg" width={450} height={450} alt="Progress Tracking" className="rounded-3xl shadow-2xl border border-white/40 backdrop-blur-md mx-auto" />
           <div>
             <h2 className="text-5xl font-extrabold text-gray-900 mb-6 leading-tight">
               Track <span className="text-indigo-600">Your Growth</span>
@@ -158,8 +163,8 @@ export default function Home() {
             <p className="text-lg text-gray-600 leading-relaxed">
               Analyze your skill development with detailed performance charts, leaderboards, and resume tips to showcase your progress effectively.
             </p>
-            <Link href="/yourprofile">
-              <button className="mt-8 inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-full shadow-lg transition-all duration-300">
+            <Link href="/dashboard">
+              <button className="mt-8 inline-flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-full shadow-lg transition-all duration-300">
                 Go to Dashboard
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -169,6 +174,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+
 
       <div className="h-[1px] bg-gray-200"></div>
 
@@ -190,6 +197,7 @@ export default function Home() {
 
 
 
+      <AssistantWidget />
 
 
       <footer className="bg-gray-900 text-white py-5 text-center flex justify-around items-center">

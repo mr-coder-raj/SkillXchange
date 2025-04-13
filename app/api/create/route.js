@@ -27,11 +27,11 @@ export async function POST(request) {
 
 
     //Give access to this user for all chats
-const slugs = ["PythonNew", "JSNew", "ReactNew", "NodeNew", "HTMLCSSNew", "DataScienceNew"]
+const slugs = ["DSA", "Development", "AI", "Marketing", "Startups", "BlockChain"]
     slugs.forEach(async (item) => {
         const channel = serverClient.channel('messaging', item, {
             image: 'https://getstream.io/random_png/?name=react',
-            name: capitalize(item) + "Discussion",
+            name: capitalize(item) + " Discussion",
             // members: [userId],
             created_by_id: user.data.id
         });

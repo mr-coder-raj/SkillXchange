@@ -1,12 +1,23 @@
-"use client"
+"use client";
 
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { db } from "@/firebaseConfig";
-import { collection, doc, setDoc, getDoc } from "firebase/firestore";
+import { collection, doc, setDoc, getDoc, getDocs, addDoc } from "firebase/firestore";
+import { StarIcon } from "@heroicons/react/24/solid";
 
 // Replace with actual logic to get the user ID (e.g., from Firebase Auth)
 const USER_ID = "user-id"; // Replace 'user-id' with the actual user ID
+
+const renderStars = (rating) => {
+  const stars = [];
+  for (let i = 0; i < 5; i++) {
+    stars.push(
+      <StarIcon key={i} className={`h-5 w-5 ${i < rating ? "text-yellow-500" : "text-gray-300"}`} />
+    );
+  }
+  return stars;
+};
 
 export default function UserProfileDashboard() {
   const [userData, setUserData] = useState({
@@ -22,16 +33,29 @@ export default function UserProfileDashboard() {
     status: "Active",
     linkedIn: "",
     gitHub: "",
-    profilePhoto: null
+    profilePhoto: null,
+    role: "Professional", // Default role
   });
 
+  const [userReviewsGiven, setUserReviewsGiven] = useState([
+    { rating: 5, comment: "Excellent service! Highly recommended.", timestamp: { seconds: Date.now() / 1000 - 86400, nanoseconds: 0 } }, // Yesterday
+    { rating: 4, comment: "Good experience, met expectations.", timestamp: { seconds: Date.now() / 1000 - 172800, nanoseconds: 0 } }, // Two days ago
+    { rating: 5, comment: "Another great interaction. Will use again.", timestamp: { seconds: Date.now() / 1000 - 259200, nanoseconds: 0 } }, // Three days ago
+    { rating: 3, comment: "It was okay, some areas for improvement.", timestamp: { seconds: Date.now() / 1000 - 345600, nanoseconds: 0 } }, // Four days ago
+  ]);
+  const [userReviewsReceived, setUserReviewsReceived] = useState([
+    { rating: 5, comment: "A pleasure to work with. Very professional.", reviewer: "Client A", timestamp: { seconds: Date.now() / 1000 - 43200, nanoseconds: 0 } }, // Half a day ago
+    { rating: 5, comment: "Delivered high-quality work on time.", reviewer: "Client B", timestamp: { seconds: Date.now() / 1000 - 259200, nanoseconds: 0 } }, // Three days ago
+    { rating: 4, comment: "Good communication and skills.", reviewer: "Client C", timestamp: { seconds: Date.now() / 1000 - 604800, nanoseconds: 0 } }, // A week ago
+    { rating: 5, comment: "Exceptional talent and dedication.", reviewer: "Client D", timestamp: { seconds: Date.now() / 1000 - 691200, nanoseconds: 0 } }, // Eight days ago
+    { rating: 4, comment: "Overall satisfied with the outcome.", reviewer: "Client E", timestamp: { seconds: Date.now() / 1000 - 777600, nanoseconds: 0 } }, // Nine days ago
+  ]);
   const [isEditing, setIsEditing] = useState(false);
 
-  // Fetch user data from Firestore
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const docRef = doc(db, "users", USER_ID); // Fetch data using user ID
+        const docRef = doc(db, "users", USER_ID);
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
@@ -39,6 +63,21 @@ export default function UserProfileDashboard() {
         } else {
           console.log("No such document!");
         }
+
+        // Fetch user's given reviews from Firebase
+        const reviewsGivenRef = collection(db, "users", USER_ID, "reviewsGiven");
+        const reviewsGivenSnap = await getDocs(reviewsGivenRef);
+        const givenReviewsFromDb = reviewsGivenSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        // Combine demo reviews with fetched reviews (demo reviews will be shown initially)
+        setUserReviewsGiven([...userReviewsGiven, ...givenReviewsFromDb]);
+
+        // Fetch user's received reviews from Firebase
+        const reviewsReceivedRef = collection(db, "users", USER_ID, "reviewsReceived");
+        const reviewsReceivedSnap = await getDocs(reviewsReceivedRef);
+        const receivedReviewsFromDb = reviewsReceivedSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        // Combine demo reviews with fetched reviews (demo reviews will be shown initially)
+        setUserReviewsReceived([...userReviewsReceived, ...receivedReviewsFromDb]);
+
       } catch (e) {
         console.error("Error fetching document:", e);
       }
@@ -65,8 +104,8 @@ export default function UserProfileDashboard() {
   const toggleEdit = async () => {
     if (isEditing) {
       try {
-        const docRef = doc(db, "users", USER_ID); // Use USER_ID to update data
-        await setDoc(docRef, userData); // Use setDoc to overwrite or create the document
+        const docRef = doc(db, "users", USER_ID);
+        await setDoc(docRef, userData);
         console.log("Document updated with ID: ", USER_ID);
       } catch (e) {
         console.error("Error saving document: ", e);
@@ -78,13 +117,12 @@ export default function UserProfileDashboard() {
   return (
     <div className="min-h-screen bg-gray-100 p-8 pt-24 transition-all ease-in-out duration-500 flex justify-center items-center">
       <div className="max-w-4xl w-full bg-white p-8 rounded-xl shadow-2xl space-y-8">
-        {/* Header */}
         <header className="bg-gradient-to-r from-indigo-600 to-indigo-500 text-white text-2xl font-semibold p-6 rounded-xl shadow-lg mb-8 text-center">
           Dashboard
         </header>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Left Side - Profile */}
+          {/* Profile Sidebar */}
           <div className="col-span-1 p-6 bg-white rounded-xl shadow-2xl transform transition-all hover:scale-105">
             <div className="flex flex-col items-center mb-6">
               <div className="relative">
@@ -118,6 +156,7 @@ export default function UserProfileDashboard() {
             </div>
 
             <div className="space-y-4">
+              {/* Email */}
               <div className="flex justify-between items-center">
                 <p className="text-sm text-gray-600 font-medium">Email:</p>
                 {isEditing ? (
@@ -132,6 +171,7 @@ export default function UserProfileDashboard() {
                 )}
               </div>
 
+              {/* Phone */}
               <div className="flex justify-between items-center">
                 <p className="text-sm text-gray-600 font-medium">Phone:</p>
                 {isEditing ? (
@@ -146,6 +186,7 @@ export default function UserProfileDashboard() {
                 )}
               </div>
 
+              {/* DOB */}
               <div className="flex justify-between items-center">
                 <p className="text-sm text-gray-600 font-medium">DOB:</p>
                 {isEditing ? (
@@ -160,8 +201,8 @@ export default function UserProfileDashboard() {
                 )}
               </div>
 
-              {/* Bio Section */}
-              <div className="flex justify-between items-center">
+              {/* Bio */}
+              <div>
                 <p className="text-sm text-gray-600 font-medium">Bio:</p>
                 {isEditing ? (
                   <textarea
@@ -176,91 +217,94 @@ export default function UserProfileDashboard() {
             </div>
           </div>
 
-          {/* Right Side - Other Info */}
+          {/* Profile Details */}
           <div className="col-span-2 space-y-6">
-            <div className="p-6 bg-white rounded-xl shadow-2xl transform transition-all hover:scale-105">
+            {/* Interests */}
+            <div className="p-6 bg-white rounded-xl shadow-2xl">
               <h3 className="text-lg font-semibold mb-4">Interests</h3>
               {isEditing ? (
                 <textarea
                   value={userData.interests || ""}
                   onChange={(e) => handleChange("interests", e.target.value)}
-                  className="w-full text-sm text-gray-700 border border-gray-300 p-4 rounded-md focus:outline-none focus:border-blue-600 transition-all duration-300 ease-in-out"
+                  className="w-full text-sm text-gray-700 border border-gray-300 p-4 rounded-md"
                 />
               ) : (
                 <p>{userData.interests || "Not Provided"}</p>
               )}
             </div>
 
-            <div className="p-6 bg-white rounded-xl shadow-2xl transform transition-all hover:scale-105">
+            {/* Skills */}
+            <div className="p-6 bg-white rounded-xl shadow-2xl">
               <h3 className="text-lg font-semibold mb-4">Skills</h3>
               {isEditing ? (
                 <input
                   type="text"
-                  value={userData.skills.join(", ") || ""}
-                  onChange={(e) => handleChange("skills", e.target.value.split(", ").map(s => s.trim()))}
-                  className="w-full text-sm text-gray-700 border border-gray-300 p-4 rounded-md focus:outline-none focus:border-blue-600 transition-all duration-300 ease-in-out"
+                  value={userData.skills.join(", ")}
+                  onChange={(e) =>
+                    handleChange("skills", e.target.value.split(",").map((s) => s.trim()))
+                  }
+                  className="w-full text-sm text-gray-700 border border-gray-300 p-4 rounded-md"
                 />
               ) : (
                 <div className="flex flex-wrap gap-2">
                   {userData.skills.length > 0
                     ? userData.skills.map((skill, idx) => (
-                        <span key={idx} className="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-xs">
-                          {skill}
-                        </span>
-                      ))
+                      <span key={idx} className="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-xs">
+                        {skill}
+                      </span>
+                    ))
                     : "No skills added"}
                 </div>
               )}
             </div>
 
-            <div className="p-6 bg-white rounded-xl shadow-2xl transform transition-all hover:scale-105">
+            {/* Experience */}
+            <div className="p-6 bg-white rounded-xl shadow-2xl">
               <h3 className="text-lg font-semibold mb-4">Experience</h3>
               {isEditing ? (
                 <textarea
                   value={userData.experience || ""}
                   onChange={(e) => handleChange("experience", e.target.value)}
-                  className="w-full text-sm text-gray-700 border border-gray-300 p-4 rounded-md focus:outline-none focus:border-blue-600 transition-all duration-300 ease-in-out"
+                  className="w-full text-sm text-gray-700 border border-gray-300 p-4 rounded-md"
                 />
               ) : (
                 <p>{userData.experience || "Not Provided"}</p>
               )}
             </div>
 
-            <div className="p-6 bg-white rounded-xl shadow-2xl transform transition-all hover:scale-105">
-              <h3 className="text-lg font-semibold mb-4">Location</h3>
-              {isEditing ? (
-                <input
-                  type="text"
-                  value={userData.location || ""}
-                  onChange={(e) => handleChange("location", e.target.value)}
-                  className="w-full text-sm text-gray-700 border border-gray-300 p-4 rounded-md focus:outline-none focus:border-blue-600 transition-all duration-300 ease-in-out"
-                />
-              ) : (
-                <p>{userData.location || "Not Provided"}</p>
-              )}
+            {/* Feedback History (Reviews Received) */}
+            <div className="p-6 bg-white rounded-xl shadow-2xl">
+              <h3 className="text-lg font-semibold mb-4">Feedback Received</h3>
+              <div className="space-y-4 overflow-y-auto max-h-64"> {/* Added scrollbar */}
+                {userReviewsReceived.length > 0 ? (
+                  userReviewsReceived.map((review, idx) => (
+                    <div key={idx} className="border-b pb-4">
+                      <div className="flex items-center mb-1">
+                        {renderStars(review.rating)}
+                      </div>
+                      <p className="font-semibold">{review.comment}</p>
+                      {review.reviewer && <p className="text-xs text-gray-500">- {review.reviewer}</p>}
+                      {review.timestamp && (
+                        <p className="text-xs text-gray-500">
+                          {new Date(review.timestamp.seconds * 1000).toLocaleDateString()}
+                        </p>
+                      )}
+                    </div>
+                  ))
+                ) : (
+                  <p>No feedback received yet.</p>
+                )}
+              </div>
             </div>
 
-            <div className="p-6 bg-white rounded-xl shadow-2xl transform transition-all hover:scale-105">
-              <h3 className="text-lg font-semibold mb-4">Profile Status</h3>
-              {isEditing ? (
-                <select
-                  value={userData.status || "Active"}
-                  onChange={(e) => handleChange("status", e.target.value)}
-                  className="w-full text-sm text-gray-700 border border-gray-300 p-4 rounded-md focus:outline-none focus:border-blue-600 transition-all duration-300 ease-in-out"
-                >
-                  <option value="Active">Active</option>
-                  <option value="Inactive">Inactive</option>
-                </select>
-              ) : (
-                <p>{userData.status || "Active"}</p>
-              )}
-            </div>
+            {/* Reviews Given by Client */}
+      
           </div>
         </div>
 
-        {/* Edit Button at the End */}
-        <div className="mt-8 flex justify-center">
-          <Button onClick={toggleEdit} className="bg-gradient-to-r from-indigo-600 to-indigo-500 hover:bg-gradient-to-l text-white px-8 py-3 rounded-xl shadow-lg transform transition-all hover:scale-105">
+        {/* Edit Button */}
+        <div className="flex justify-center">
+          <Button className="mt-8" onClick={toggleEdit}>
             {isEditing ? "Save Changes" : "Edit Profile"}
           </Button>
         </div>

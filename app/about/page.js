@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import Link from 'next/link';
 
 export default function AboutSpeakSpace() {
   return (
@@ -20,11 +21,6 @@ export default function AboutSpeakSpace() {
         <p className="text-lg text-gray-600 max-w-3xl mx-auto">
           SpeakSpace is your personal practice zone for mastering Group Discussions and Interviews through real-time collaboration and constructive feedback.
         </p>
-        <img
-          src="https://images.unsplash.com/photo-1581091870620-d2c3b2bf33c0"
-          alt="Communication Illustration"
-          className="w-full max-w-4xl mx-auto mt-10 rounded-2xl shadow-lg"
-        />
       </motion.div>
 
       {/* What is SpeakSpace */}
@@ -117,10 +113,10 @@ export default function AboutSpeakSpace() {
         <h2 className="text-3xl font-bold mb-2 text-blue-700">Get Involved</h2>
         <p className="mb-5 text-gray-700">
           Want to partner, contribute, or use SpeakSpace for your college?
-        </p>
+        </p><Link href="/contact">
         <Button className="bg-blue-600 text-white hover:bg-blue-700 px-6 py-2 text-lg rounded-full">
           Contact Us
-        </Button>
+        </Button></Link>
         <p className="text-sm text-gray-500 mt-3">📩 connect@speakspace.com</p>
       </section>
     </div>

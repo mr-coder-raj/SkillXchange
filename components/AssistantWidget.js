@@ -3,8 +3,7 @@
 import React, { useState } from "react";
 import { MessageCircle } from "lucide-react";
 
-
-export default function AssistantBot() {
+function AssistantBot() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState([
     { role: "assistant", content: "Hi! How can I help you today?" },
@@ -47,21 +46,26 @@ export default function AssistantBot() {
       {/* Chat Box */}
       {open && (
         <div
-          className="fixed bottom-24 right-6 z-50 w-96 max-w-sm bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden"
+          className="fixed bottom-0 right-0 sm:bottom-24 sm:right-6 z-50 w-full sm:w-96 bg-white rounded-t-2xl sm:rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden max-h-[80vh]"
         >
+          {/* Header */}
           <div className="bg-indigo-600 text-white px-4 py-3 font-bold flex justify-between items-center">
             SpeakSpace Assistant
             <button onClick={() => setOpen(false)} className="text-white">✕</button>
           </div>
 
-          <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-50 max-h-80">
+          {/* Messages */}
+          <div
+            className="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-50"
+            style={{ scrollBehavior: "smooth" }}
+          >
             {messages.map((msg, i) => (
               <div
                 key={i}
                 className={`p-3 max-w-[80%] text-sm rounded-xl ${msg.role === "assistant"
-                    ? "bg-white text-left text-gray-700 shadow border"
-                    : "bg-indigo-100 text-right ml-auto"
-                  }`}
+                  ? "bg-white text-left text-gray-700 shadow border"
+                  : "bg-indigo-100 text-right ml-auto"
+                }`}
               >
                 {msg.content}
               </div>
@@ -73,6 +77,7 @@ export default function AssistantBot() {
             )}
           </div>
 
+          {/* Input */}
           <div className="flex items-center border-t p-3 bg-white">
             <input
               className="flex-1 text-sm p-2 border rounded-l-md outline-none"
@@ -102,3 +107,5 @@ export default function AssistantBot() {
     </>
   );
 }
+
+export default AssistantBot;
