@@ -37,19 +37,11 @@ export default function UserProfileDashboard() {
     role: "Professional", // Default role
   });
 
-  const [userReviewsGiven, setUserReviewsGiven] = useState([
-    { rating: 5, comment: "Excellent service! Highly recommended.", timestamp: { seconds: Date.now() / 1000 - 86400, nanoseconds: 0 } }, // Yesterday
-    { rating: 4, comment: "Good experience, met expectations.", timestamp: { seconds: Date.now() / 1000 - 172800, nanoseconds: 0 } }, // Two days ago
-    { rating: 5, comment: "Another great interaction. Will use again.", timestamp: { seconds: Date.now() / 1000 - 259200, nanoseconds: 0 } }, // Three days ago
-    { rating: 3, comment: "It was okay, some areas for improvement.", timestamp: { seconds: Date.now() / 1000 - 345600, nanoseconds: 0 } }, // Four days ago
-  ]);
-  const [userReviewsReceived, setUserReviewsReceived] = useState([
-    { rating: 5, comment: "A pleasure to work with. Very professional.", reviewer: "Client A", timestamp: { seconds: Date.now() / 1000 - 43200, nanoseconds: 0 } }, // Half a day ago
-    { rating: 5, comment: "Delivered high-quality work on time.", reviewer: "Client B", timestamp: { seconds: Date.now() / 1000 - 259200, nanoseconds: 0 } }, // Three days ago
-    { rating: 4, comment: "Good communication and skills.", reviewer: "Client C", timestamp: { seconds: Date.now() / 1000 - 604800, nanoseconds: 0 } }, // A week ago
-    { rating: 5, comment: "Exceptional talent and dedication.", reviewer: "Client D", timestamp: { seconds: Date.now() / 1000 - 691200, nanoseconds: 0 } }, // Eight days ago
-    { rating: 4, comment: "Overall satisfied with the outcome.", reviewer: "Client E", timestamp: { seconds: Date.now() / 1000 - 777600, nanoseconds: 0 } }, // Nine days ago
-  ]);
+  const [userReviewsGiven, setUserReviewsGiven] = useState([]);
+  const [userReviewsReceived, setUserReviewsReceived] = useState([]);
+
+
+
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
@@ -220,7 +212,7 @@ export default function UserProfileDashboard() {
           {/* Profile Details */}
           <div className="col-span-2 space-y-6">
             {/* Interests */}
-            <div className="p-6 bg-white rounded-xl shadow-2xl">
+            <div className="p-6 bg-white rounded-xl shadow-2xl transform transition-all hover:scale-105">
               <h3 className="text-lg font-semibold mb-4">Interests</h3>
               {isEditing ? (
                 <textarea
@@ -234,7 +226,7 @@ export default function UserProfileDashboard() {
             </div>
 
             {/* Skills */}
-            <div className="p-6 bg-white rounded-xl shadow-2xl">
+            <div className="p-6 bg-white rounded-xl shadow-2xl transform transition-all hover:scale-105">
               <h3 className="text-lg font-semibold mb-4">Skills</h3>
               {isEditing ? (
                 <input
@@ -259,7 +251,7 @@ export default function UserProfileDashboard() {
             </div>
 
             {/* Experience */}
-            <div className="p-6 bg-white rounded-xl shadow-2xl">
+            <div className="p-6 bg-white rounded-xl shadow-2xl transform transition-all hover:scale-105">
               <h3 className="text-lg font-semibold mb-4">Experience</h3>
               {isEditing ? (
                 <textarea
@@ -272,8 +264,101 @@ export default function UserProfileDashboard() {
               )}
             </div>
 
+            {/* Additional Info */}
+            <div className="p-6 bg-white rounded-xl shadow-2xl space-y-6 transform transition-all hover:scale-105">
+              {/* Location */}
+              <div>
+                <h3 className="text-lg font-semibold mb-2">Location</h3>
+                {isEditing ? (
+                  <input
+                    type="text"
+                    value={userData.location || ""}
+                    onChange={(e) => handleChange("location", e.target.value)}
+                    className="w-full text-sm text-gray-700 border border-gray-300 p-3 rounded-md"
+                  />
+                ) : (
+                  <p>{userData.location || "Not Provided"}</p>
+                )}
+              </div>
+
+              {/* Status */}
+              <div>
+                <h3 className="text-lg font-semibold mb-2">Status</h3>
+                {isEditing ? (
+                  <select
+                    value={userData.status || "Active"}
+                    onChange={(e) => handleChange("status", e.target.value)}
+                    className="w-full text-sm text-gray-700 border border-gray-300 px-4 py-3 rounded-md"
+                  >
+                    <option value="Active">Active</option>
+                    <option value="Busy">Busy</option>
+                    <option value="Inactive">Inactive</option>
+                  </select>
+                ) : (
+                  <span
+                    className={`text-sm font-semibold px-3 py-1 rounded-full ${userData.status === "Active"
+                        ? "text-green-600 bg-green-100"
+                        : userData.status === "Busy"
+                          ? "text-red-600 bg-red-100"
+                          : userData.status === "Inactive"
+                            ? "text-orange-600 bg-orange-100"
+                            : "text-gray-600 bg-gray-100"
+                      }`}
+                  >
+                    {userData.status || "Not Provided"}
+                  </span>
+                )}
+              </div>
+
+              {/* LinkedIn */}
+              <div>
+                <h3 className="text-lg font-semibold mb-2">LinkedIn</h3>
+                {isEditing ? (
+                  <input
+                    type="text"
+                    value={userData.linkedIn || ""}
+                    onChange={(e) => handleChange("linkedIn", e.target.value)}
+                    className="w-full text-sm text-gray-700 border border-gray-300 p-3 rounded-md"
+                  />
+                ) : (
+                  <a
+                    href={userData.linkedIn}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-600 hover:underline"
+                  >
+                    {userData.linkedIn || "Not Provided"}
+                  </a>
+                )}
+              </div>
+
+              {/* GitHub */}
+              <div>
+                <h3 className="text-lg font-semibold mb-2">GitHub</h3>
+                {isEditing ? (
+                  <input
+                    type="text"
+                    value={userData.gitHub || ""}
+                    onChange={(e) => handleChange("gitHub", e.target.value)}
+                    className="w-full text-sm text-gray-700 border border-gray-300 p-3 rounded-md"
+                  />
+                ) : (
+                  <a
+                    href={userData.gitHub}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-800 hover:underline"
+                  >
+                    {userData.gitHub || "Not Provided"}
+                  </a>
+                )}
+              </div>
+            </div>
+
+
+
             {/* Feedback History (Reviews Received) */}
-            <div className="p-6 bg-white rounded-xl shadow-2xl">
+            <div className="p-6 bg-white rounded-xl shadow-2xl transform transition-all hover:scale-105">
               <h3 className="text-lg font-semibold mb-4">Feedback Received</h3>
               <div className="space-y-4 overflow-y-auto max-h-64"> {/* Added scrollbar */}
                 {userReviewsReceived.length > 0 ? (
@@ -297,13 +382,40 @@ export default function UserProfileDashboard() {
               </div>
             </div>
 
-            {/* Reviews Given by Client */}
-      
+
+            {/* Role */}
+            <div className="p-6 bg-white rounded-xl shadow-2xl transform transition-all hover:scale-105">
+              <h3 className="text-lg font-semibold mb-4">User Role</h3>
+              <div className="flex items-center justify-between">
+                <p className="text-sm text-gray-600 font-medium">Current Role:</p>
+                {isEditing ? (
+                  <select
+                    value={userData.role || "Professional"}
+                    onChange={(e) => handleChange("role", e.target.value)}
+                    className="text-sm text-gray-700 border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 ease-in-out"
+                  >
+                    <option value="Professional">Professional</option>
+                    <option value="Employer">Employer</option>
+                    <option value="Moderator">Moderator</option>
+                    <option value="Evaluator">Evaluator</option>
+                    <option value="Participant">Participant</option>
+                  </select>
+                ) : (
+                  <span className="text-sm text-indigo-600 font-semibold px-3 py-1 bg-indigo-100 rounded-full">
+                    {userData.role || "Not Specified"}
+                  </span>
+                )}
+              </div>
+            </div>
+
+
+
+
           </div>
         </div>
 
         {/* Edit Button */}
-        <div className="flex justify-center">
+        <div className="flex justify-center transform transition-all hover:scale-110">
           <Button className="mt-8" onClick={toggleEdit}>
             {isEditing ? "Save Changes" : "Edit Profile"}
           </Button>

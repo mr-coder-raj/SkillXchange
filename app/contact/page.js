@@ -1,8 +1,32 @@
 export default function ContactPage() {
+
+  const sendEmail = async () => {
+    let dataSend = {
+      email: email,
+      subject: subject,
+      message: message,
+    };
+
+    const res = await fetch(`${baseUrl}/email/sendEmail`, {
+      method: "POST",
+      body: JSON.stringify(dataSend),
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    })
+      // HANDLING ERRORS
+      .then((res) => {
+        console.log(res);
+        if (res.status > 199 && res.status < 300) {
+          alert("Send Successfully !");
+        }
+      });
+  };
     return (
-      <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 pt-20">
+      <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 pt-28">
         <div className="max-w-2xl mx-auto">
-          <h2 className="text-3xl font-bold text-gray-800 text-center mb-8">Contact Us</h2>
+          <h2 className="text-5xl font-bold text-gray-800 text-center mb-8">Contact Us</h2>
   
           <div className="bg-white shadow-xl rounded-2xl p-8 space-y-8">
             {/* Contact Form */}
@@ -46,7 +70,7 @@ export default function ContactPage() {
               <div>
                 <button
                   type="submit"
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-xl transition duration-300"
+                  className="w-full bg-gradient-to-r from-purple-600 to-indigo-800 hover:from-indigo-800 hover:to-purple-600 text-white font-semibold py-3 px-6 rounded-xl transition duration-300"
                 >
                   Send Message
                 </button>
@@ -57,14 +81,14 @@ export default function ContactPage() {
             <div className="pt-6 border-t border-gray-200 space-y-4 text-gray-700">
               <div>
                 <h3 className="text-xl font-semibold">Reach Us At</h3>
-                <p>Email: support@speakspace.com</p>
+                <p>Email: skillxchangesupport@gmail.com</p>
                 <p>Phone: +91 9876543210</p>
               </div>
               <div>
                 <h3 className="text-xl font-semibold">Office Address</h3>
-                <p>DAIICT, Infocity</p>
-                <p>Gandhinagar, Gujarat</p>
-                <p>India - 400001</p>
+                <p>GTU Campus</p>
+                <p>Ahmedabad, Gujarat</p>
+                <p>India - 123456</p>
               </div>
             </div>
           </div>

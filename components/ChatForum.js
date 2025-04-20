@@ -47,16 +47,21 @@ const ChatForum = ({ clerkUser, slug }) => {
     if (!client) return <div>Setting up client & connection...</div>;
 
     return (
-        <Chat client={client}>
-            <Channel channel={channel}>
-                <Window>
-                    <ChannelHeader />
-                    <MessageList />
-                    <MessageInput />
-                </Window>
-                <Thread />
-            </Channel>
-        </Chat>
+        <div className='max-h-[90vh] pt-20 '>
+            <Chat client={client}>
+                <Channel channel={channel}>
+                    <div className='h-[90vh] w-full'>
+                        <Window>
+                            <ChannelHeader />
+                            <MessageList />
+                            <MessageInput />
+                        </Window>
+                        <Thread />
+                    </div >
+                </Channel>
+            </Chat>
+        </div>
+
     );
 }
 

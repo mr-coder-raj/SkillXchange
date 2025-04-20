@@ -1,14 +1,17 @@
 "use client"
 
 import { useParams } from 'next/navigation'
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import { ZegoUIKitPrebuilt } from '@zegocloud/zego-uikit-prebuilt'
 
 const Page = () => {
     const { id } = useParams()
     const containerRef = useRef()
+    const [isJoined, setIsJoined] = useState(false)  // Track whether the meeting is joined or not
 
     let myMeeting = async (element) => {
+        if (isJoined) return  // If already joined, don't join again
+
         const appID = 1766688893
         const serverSecret = "f0881e4a767ad6852272720a0b4d474f"
         const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(
@@ -18,23 +21,27 @@ const Page = () => {
             Date.now().toString(),
             'Raj Ribadiya'
         )
-        
 
         const zp = ZegoUIKitPrebuilt.create(kitToken)
-        zp.joinRoom({
-            container: element,
-            sharedLinks: [
-                {
-                    name: 'Personal link',
-                    url:
-                        window.location.protocol + '//' +
-                        window.location.host + window.location.pathname,
+
+        // Ensure the zp instance exists before trying to join the room
+        if (zp) {
+            zp.joinRoom({
+                container: element,
+                sharedLinks: [
+                    {
+                        name: 'Personal link',
+                        url:
+                            window.location.protocol + '//' +
+                            window.location.host + window.location.pathname,
+                    },
+                ],
+                scenario: {
+                    mode: ZegoUIKitPrebuilt.OneONoneCall,
                 },
-            ],
-            scenario: {
-                mode: ZegoUIKitPrebuilt.OneONoneCall,
-            },
-        })
+            })
+            setIsJoined(true)  // Set to true once the meeting is joined
+        }
     }
 
     useEffect(() => {
@@ -42,13 +49,15 @@ const Page = () => {
             console.log('Container not found')
             return
         }
-        if (containerRef.current && id) {
-            myMeeting(containerRef.current);
+
+        // Ensure the id exists and the meeting is not already joined
+        if (containerRef.current && id && !isJoined) {
+            myMeeting(containerRef.current)
         }
-    }, [id])
+    }, [id, isJoined])  // Add isJoined to dependency array
 
     return (
-        <div style={{ height: '100vh', width: '100vw' }} ref={containerRef} />
+        <div className='pt-14' style={{ height: '100vh', width: '100vw' }} ref={containerRef} />
     )
 }
 

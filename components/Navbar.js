@@ -27,9 +27,9 @@ export default function Navbar() {
 
   const navLinks = [
     { name: "Home", href: "/" },
-    { name: "Explore", href: "/forums" },
+    { name: "Explore", href: "/explore" },
     { name: "About", href: "/about" },
-    // { name: "Assistant", href: "/chat" },
+    { name: "Contact", href: "/contact" },
     { name: "Dashboard", href: "/dashboard" },
   ];
 
@@ -41,12 +41,12 @@ export default function Navbar() {
     >
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         {/* Logo Section */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1">
           <Link href="/">
-            <Image src="/logo.png" width={40} height={40} alt="Logo" className="rounded-full" />
+            <Image src="/logo.png" width={50} height={50} alt="Logo" className="rounded-full" />
           </Link>
-          <Link href="/" className="hidden sm:block">
-            <h1 className="text-white font-extrabold text-3xl">SpeakSpace</h1>
+          <Link href="/" className="hidden sm:block pt-2">
+            <h1 className="text-white font-extrabold text-3xl fill-white"><Image src="/MainLogo2.png" width={300} height={40} alt="Logo" className="rounded-full" /></h1>
           </Link>
         </div>
 

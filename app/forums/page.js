@@ -8,40 +8,41 @@ const topics = [
   {
     text: 'DSA',
     img: '/DSA.png',
-    desc: 'Let’s discuss everything related to Python.',
+    desc: 'Everything about Data Structures and Algorithms',
     slug: 'DSA',
   },
   {
     text: 'Development',
     img: '/DEV.png',
-    desc: 'A place to talk about all things JavaScript.',
+    desc: 'Discuss all things related to JavaScript development',
     slug: 'Development',
   },
   {
     text: 'Artificial Intelligence',
     img: '/AI.png',
-    desc: 'Discuss React.js, React Native, and related technologies.',
+    desc: 'Insights into AI, Machine Learning, and Data Science',
     slug: 'AI',
   },
   {
     text: 'Marketing',
     img: '/MAR.png',
-    desc: 'Backend JavaScript development with Node.js.',
+    desc: 'Explore digital marketing strategies and techniques',
     slug: 'Marketing',
   },
   {
     text: 'Startups',
     img: '/SU.png',
-    desc: 'Front-end development with HTML and CSS.',
+    desc: 'Conversations on starting and scaling a business',
     slug: 'Startups',
   },
   {
     text: 'Blockchain',
     img: '/BC.png',
-    desc: 'Discussions on data analysis, machine learning, and AI.',
+    desc: 'Understanding blockchain technology and its applications',
     slug: 'BlockChain',
   },
 ];
+
 
 const resources = [
   { title: 'Interview Tips', icon: <BookOpen className="w-8 h-8 text-indigo-700" /> },
@@ -51,11 +52,11 @@ const resources = [
 
 const Forums = () => {
   return (
-    <div className="bg-gradient-to-br from-indigo-50 to-white py-20 min-h-screen pt-32">
+    <div className="bg-gradient-to-br from-indigo-50 to-white py-20 h-[90vh] pt-32">
       <div className="container mx-auto px-4">
         {/* Header */}
         <header className="text-5xl font-extrabold text-blue-800 mb-8 text-center">
-          🌐 Explore SpeakSpace
+          🌐 Explore SkillXchange
         </header>
 
         {/* Forum Cards */}
@@ -83,22 +84,8 @@ const Forums = () => {
           ))}
         </div>
 
-        {/* Mock Interviews Section */}
-        <section className="mb-24">
-          <div className="bg-gradient-to-r from-indigo-200 to-indigo-300 p-10 rounded-3xl shadow-2xl text-center max-w-4xl mx-auto">
-            <button>
-            <h2 className="text-3xl font-semibold text-indigo-900 mb-4">🎤 Mock Interviews</h2></button>
-            <p className="text-gray-800 mb-6 text-md">
-              Practice real-time mock interviews with peers or mentors. Boost your confidence, improve communication, and get feedback.
-            </p><Link href="/videochat">
-            <Button className="bg-indigo-700 hover:bg-indigo-900 text-white px-8 py-3 rounded-full text-sm shadow-lg">
-              Start a Mock Interview
-            </Button></Link>
-          </div>
-        </section>
-
         {/* Resources Section */}
-        <section>
+        {/* <section>
           <h2 className="text-3xl font-semibold text-center text-indigo-900 mb-10">📚 Premium Resources</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {resources.map((res, index) => (
@@ -111,7 +98,7 @@ const Forums = () => {
               </div>
             ))}
           </div>
-        </section>
+        </section> */}
       </div>
     </div>
   );
