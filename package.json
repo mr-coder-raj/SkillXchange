@@ -15,12 +15,13 @@
     "@emotion/styled": "^11.14.0",
     "@google/generative-ai": "^0.24.0",
     "@heroicons/react": "^2.2.0",
+    "@lottiefiles/lottie-player": "^2.0.12",
     "@radix-ui/react-slot": "^1.1.2",
     "@zegocloud/zego-uikit-prebuilt": "^2.14.3-beta",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "firebase": "^11.6.0",
-    "framer-motion": "^12.7.4",
+    "framer-motion": "^12.9.0",
     "lucide-react": "^0.476.0",
     "next": "^15.2.3",
     "nodemailer": "^6.10.1",
@@ -31,7 +32,8 @@
     "stream-chat": "^8.59.0",
     "stream-chat-react": "^12.14.0",
     "tailwind-merge": "^3.0.2",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

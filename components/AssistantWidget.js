@@ -97,11 +97,10 @@ function AssistantBot() {
             {messages.map((msg, i) => (
               <div
                 key={i}
-                className={`p-3 max-w-[80%] text-sm rounded-xl ${
-                  msg.role === "assistant"
+                className={`p-3 max-w-[80%] text-sm rounded-xl ${msg.role === "assistant"
                     ? "bg-white text-left text-gray-700 shadow border"
                     : "bg-indigo-100 text-right ml-auto"
-                }`}
+                  }`}
               >
                 {msg.content}
               </div>
@@ -143,10 +142,16 @@ function AssistantBot() {
           zIndex: 50,
           cursor: "grab",
         }}
-        className="bg-indigo-600 text-white p-4 rounded-full shadow-xl hover:scale-105 transition-transform"
+        // className="bg-indigo-600 text-white rounded-full shadow-xl hover:scale-105 transition-transform"
         aria-label="Assistant"
       >
-        <MessageCircle className="w-5 h-5" />
+        <lord-icon
+          src="https://cdn.lordicon.com/gqlpvzkp.json"
+          trigger="morph"
+          state="morph-circle"
+          colors="primary:#4030e8,secondary:#ebe6ef"
+          style={{ width: '60px', height: '60px' }}>
+        </lord-icon>
       </button>
     </>
   );

@@ -3,11 +3,11 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { UserButton } from "@clerk/nextjs";
 import Image from "next/image";
 import { FiMenu, FiX } from "react-icons/fi";
 import { AnimatePresence, motion } from "framer-motion";
 // import { useUser } from "@clerk/nextjs";
+import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
 export default function Navbar() {
   // const user = useUser();
@@ -43,7 +43,13 @@ export default function Navbar() {
         {/* Logo Section */}
         <div className="flex items-center gap-1">
           <Link href="/">
-            <Image src="/logo.png" width={50} height={50} alt="Logo" className="rounded-full" />
+            {/* <Image src="/logo.png" width={45} height={45} alt="Logo" className="rounded-full" /> */}
+            <lord-icon
+              src="https://cdn.lordicon.com/szvbserk.json"
+              trigger="hover"
+              colors="primary:#4030e8,secondary:#ffffff,tertiary:#ebe6ef"
+              style={{ width: '50px', height: '50px' }}
+            ></lord-icon>
           </Link>
           <Link href="/" className="hidden sm:block pt-2">
             <h1 className="text-white font-extrabold text-3xl fill-white"><Image src="/MainLogo2.png" width={300} height={40} alt="Logo" className="rounded-full" /></h1>
@@ -56,9 +62,8 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className={`relative group ${
-                pathname === link.href ? "text-white" : "text-gray-300"
-              } transition`}
+              className={`relative group ${pathname === link.href ? "text-white" : "text-gray-300"
+                } transition`}
             >
               {link.name}
               <span
@@ -68,6 +73,21 @@ export default function Navbar() {
             </Link>
           ))}
           <UserButton afterSignOutUrl="/" />
+          <Link href="/">
+            <SignedOut>
+              <SignInButton mode="modal" forceRedirectUrl="/">
+                <button className="flex items-center gap-2 bg-indigo-600 text-white py-2.5 px-5 rounded-full font-semibold hover:bg-indigo-700 hover:scale-105 transition-all duration-300 transform shadow-md">
+                  <lord-icon
+                    src="https://cdn.lordicon.com/hroklero.json"
+                    trigger="hover"
+                    style={{ width: "25px", height: "25px" }}
+                  ></lord-icon>
+                  SignUp / SignIn
+                </button>
+              </SignInButton>
+            </SignedOut>
+          </Link>
+
         </div>
 
         {/* Mobile Toggle */}
@@ -92,9 +112,8 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`block py-2 transition ${
-                  pathname === link.href ? "text-white" : "hover:text-white"
-                }`}
+                className={`block py-2 transition ${pathname === link.href ? "text-white" : "hover:text-white"
+                  }`}
               >
                 {link.name}
               </Link>

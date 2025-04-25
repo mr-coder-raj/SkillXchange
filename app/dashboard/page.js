@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { db } from "@/firebaseConfig";
 import { collection, doc, setDoc, getDoc, getDocs, addDoc } from "firebase/firestore";
 import { StarIcon } from "@heroicons/react/24/solid";
+import Link from "next/link";
 
 // Replace with actual logic to get the user ID (e.g., from Firebase Auth)
 const USER_ID = "user-id"; // Replace 'user-id' with the actual user ID
@@ -28,13 +29,14 @@ export default function UserProfileDashboard() {
     bio: "",
     interests: "",
     skills: [""],
+    skillsNeeded: [""], // ➕ New field added
     experience: "",
     location: "",
     status: "Active",
     linkedIn: "",
     gitHub: "",
     profilePhoto: null,
-    role: "Professional", // Default role
+    role: "Professional",
   });
 
   const [userReviewsGiven, setUserReviewsGiven] = useState([]);
@@ -250,6 +252,31 @@ export default function UserProfileDashboard() {
               )}
             </div>
 
+            {/* Skills needed */}
+            <div className="p-6 bg-white rounded-xl shadow-2xl transform transition-all hover:scale-105">
+              <h3 className="text-lg font-semibold mb-4">Skills Needed</h3>
+              {isEditing ? (
+                <input
+                  type="text"
+                  value={userData.skillsNeeded.join(", ")}
+                  onChange={(e) =>
+                    handleChange("skillsNeeded", e.target.value.split(",").map((s) => s.trim()))
+                  }
+                  className="w-full text-sm text-gray-700 border border-gray-300 p-4 rounded-md"
+                />
+              ) : (
+                <div className="flex flex-wrap gap-2">
+                  {userData.skillsNeeded.length > 0
+                    ? userData.skillsNeeded.map((skill, idx) => (
+                      <span key={idx} className="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-xs">
+                        {skill}
+                      </span>
+                    ))
+                    : "No skills added"}
+                </div>
+              )}
+            </div>
+
             {/* Experience */}
             <div className="p-6 bg-white rounded-xl shadow-2xl transform transition-all hover:scale-105">
               <h3 className="text-lg font-semibold mb-4">Experience</h3>
@@ -297,12 +324,12 @@ export default function UserProfileDashboard() {
                 ) : (
                   <span
                     className={`text-sm font-semibold px-3 py-1 rounded-full ${userData.status === "Active"
-                        ? "text-green-600 bg-green-100"
-                        : userData.status === "Busy"
-                          ? "text-red-600 bg-red-100"
-                          : userData.status === "Inactive"
-                            ? "text-orange-600 bg-orange-100"
-                            : "text-gray-600 bg-gray-100"
+                      ? "text-green-600 bg-green-100"
+                      : userData.status === "Busy"
+                        ? "text-red-600 bg-red-100"
+                        : userData.status === "Inactive"
+                          ? "text-orange-600 bg-orange-100"
+                          : "text-gray-600 bg-gray-100"
                       }`}
                   >
                     {userData.status || "Not Provided"}
@@ -322,13 +349,14 @@ export default function UserProfileDashboard() {
                   />
                 ) : (
                   <a
-                    href={userData.linkedIn}
+                    href={userData.linkedIn?.startsWith("http") ? userData.linkedIn : `https://${userData.linkedIn}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-blue-600 hover:underline"
                   >
                     {userData.linkedIn || "Not Provided"}
                   </a>
+
                 )}
               </div>
 
@@ -344,13 +372,14 @@ export default function UserProfileDashboard() {
                   />
                 ) : (
                   <a
-                    href={userData.gitHub}
+                    href={userData.gitHub?.startsWith("http") ? userData.gitHub : `https://${userData.gitHub}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-800 hover:underline"
                   >
                     {userData.gitHub || "Not Provided"}
                   </a>
+
                 )}
               </div>
             </div>
@@ -409,8 +438,6 @@ export default function UserProfileDashboard() {
             </div>
 
 
-
-
           </div>
         </div>
 
@@ -420,6 +447,7 @@ export default function UserProfileDashboard() {
             {isEditing ? "Save Changes" : "Edit Profile"}
           </Button>
         </div>
+
       </div>
     </div>
   );

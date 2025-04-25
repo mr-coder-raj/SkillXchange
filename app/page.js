@@ -3,6 +3,9 @@ import Image from "next/image";
 import Link from 'next/link';
 import Head from 'next/head';
 import AssistantWidget from "@/components/AssistantWidget";
+import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import { FaGithub, FaInstagram, FaTwitter, FaFacebook, FaYoutube } from "react-icons/fa";
+
 
 export default function Home() {
   return (
@@ -21,10 +24,39 @@ export default function Home() {
           <p className="text-lg md:text-2xl mb-8 transition-opacity duration-500 opacity-90">
             Learn, Share and Grow Together!
           </p>
+          <Link href="/">
+            <SignedOut>
+              <SignInButton mode="modal" forceRedirectUrl="/">
+                <button className="flex items-center m-auto mt-14 gap-2 bg-white text-black py-3 px-5 rounded-full font-semibold hover:bg-gray-200 hover:scale-105 transition-all duration-300 transform shadow-md">
+                  <lord-icon
+                    src="https://cdn.lordicon.com/hroklero.json"
+                    trigger="hover"
+                    style={{ width: "25px", height: "25px" }}
+                  ></lord-icon>
+                  SignUp / Signin
+                </button>
+              </SignInButton>
+            </SignedOut>
+          </Link>
           <Link href="/explore">
-            <button className="bg-white text-purple-700 py-3 px-8 rounded-full font-semibold hover:bg-gray-100 hover:scale-105 transition-all duration-300 transform">
-              Get Started
-            </button>
+            <SignedIn>
+
+              <button className="bg-white text-purple-700 py-3 px-6 rounded-full font-semibold hover:bg-gray-100 hover:scale-105 transition-all duration-300 transform">
+                <div className="flex justify-center items-center gap-3">
+
+                  <lord-icon
+                    src="https://cdn.lordicon.com/xjncyyrw.json"
+                    trigger="hover"
+                    colors="primary:#f24c00,secondary:#4030e8,tertiary:#b26836,quaternary:#ebe6ef"
+                    style={{ width: '40px', height: '40px' }}>
+                  </lord-icon>
+                  <p className="text-lg">
+                    Get Started
+                  </p>
+
+                </div>
+              </button>
+            </SignedIn>
           </Link>
         </div>
       </header>
@@ -138,20 +170,58 @@ export default function Home() {
             SkillXChange helps individuals and teams identify strengths, develop in-demand skills, and collaborate on real-world projects—turning potential into performance.
           </p>
 
+          <Link href="/">
+            <SignedOut>
+              <SignInButton mode="modal" forceRedirectUrl="/">
+                <button className="mt-8 bg-indigo-600 hover:bg-indigo-800 text-white px-8 py-4 rounded-full font-semibold text-lg shadow-lg transition-transform duration-300 transform hover:scale-105">
+                  Get Started
+                </button>
+              </SignInButton>
+            </SignedOut>
+          </Link>
           <Link href="/explore">
-            <button className="mt-8 bg-indigo-600 hover:bg-indigo-800 text-white px-8 py-4 rounded-full font-semibold text-lg shadow-lg transition-transform duration-300 transform hover:scale-105">
-              Get Started
-            </button>
+            <SignedIn>
+              <button className="mt-8 bg-indigo-600 hover:bg-indigo-800 text-white px-8 py-4 rounded-full font-semibold text-lg shadow-lg transition-transform duration-300 transform hover:scale-105">
+                <div className="flex justify-center items-center gap-3">
+
+                  <lord-icon
+                    src="https://cdn.lordicon.com/xjncyyrw.json"
+                    trigger="hover"
+                    colors="primary:#f24c00,secondary:#e4e4e4,tertiary:#b26836,quaternary:#242424"
+                    style={{ width: '40px', height: '40px' }}>
+                  </lord-icon>
+                  <p className="text-lg">
+                    Get Started
+                  </p>
+
+                </div>
+              </button>
+            </SignedIn>
           </Link>
         </div>
       </section>
 
       <AssistantWidget />
 
-      <footer className="bg-gray-900 text-white py-5 text-center flex justify-around items-center">
-        <p>&copy; {new Date().getFullYear()} SkillXchange. All rights reserved.</p>
-        <div className="cursor-pointer transform hover:scale-105 transition-transform duration-300">
-          <Image src="/image.png" width={250} height={60} alt='' className='rounded-full mr-2' />
+      <footer className="bg-gray-900 text-white py-6 px-4 flex flex-col md:flex-row justify-around items-center">
+        <p className="text-md mb-3 md:mb-0">&copy; {new Date().getFullYear()} SkillXchange. All rights reserved.</p>
+
+        <div className="flex gap-6 text-3xl">
+          <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="hover:text-purple-400 transition-colors duration-300">
+            <FaGithub />
+          </a>
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" className="hover:text-pink-400 transition-colors duration-300">
+            <FaInstagram />
+          </a>
+          <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" className="hover:text-sky-400 transition-colors duration-300">
+            <FaTwitter />
+          </a>
+          <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer" className="hover:text-blue-500 transition-colors duration-300">
+            <FaFacebook />
+          </a>
+          <a href="https://youtube.com/" target="_blank" rel="noopener noreferrer" className="hover:text-red-500 transition-colors duration-300">
+            <FaYoutube />
+          </a>
         </div>
       </footer>
     </div>
