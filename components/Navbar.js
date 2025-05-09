@@ -47,7 +47,7 @@ export default function Navbar() {
             <lord-icon
               src="https://cdn.lordicon.com/szvbserk.json"
               trigger="hover"
-              colors="primary:#4030e8,secondary:#ffffff,tertiary:#ebe6ef"
+              colors="primary:#8930e8,secondary:#ffffff,tertiary:#ffffff"
               style={{ width: '50px', height: '50px' }}
             ></lord-icon>
           </Link>

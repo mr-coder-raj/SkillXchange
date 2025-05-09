@@ -55,8 +55,13 @@ const Forums = () => {
     <div className="bg-gradient-to-br from-indigo-50 to-white py-20 h-[90vh] pt-32">
       <div className="container mx-auto px-4">
         {/* Header */}
-        <header className="text-5xl font-extrabold text-blue-800 mb-8 text-center">
-          🌐 Explore SkillXchange
+        <header className="text-5xl font-extrabold text-blue-800 mb-8 text-center flex gap-3 items-center justify-center">
+          <lord-icon
+            src="https://cdn.lordicon.com/fmdwwfgs.json"
+            trigger="hover"
+            style={{ width: '80px', height: '80px' }}
+          ></lord-icon>
+          Discussion Forums
         </header>
 
         {/* Forum Cards */}

@@ -207,13 +207,13 @@ export default function Home() {
         <p className="text-md mb-3 md:mb-0">&copy; {new Date().getFullYear()} SkillXchange. All rights reserved.</p>
 
         <div className="flex gap-6 text-3xl">
-          <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="hover:text-purple-400 transition-colors duration-300">
+          <a href="https://github.com/mr-coder-raj" target="_blank" rel="noopener noreferrer" className="hover:text-purple-400 transition-colors duration-300">
             <FaGithub />
           </a>
-          <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" className="hover:text-pink-400 transition-colors duration-300">
+          <a href="https://www.instagram.com/ribadiya_raj" target="_blank" rel="noopener noreferrer" className="hover:text-pink-400 transition-colors duration-300">
             <FaInstagram />
           </a>
-          <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" className="hover:text-sky-400 transition-colors duration-300">
+          <a href="https://twitter.com/RRibadiya9635" target="_blank" rel="noopener noreferrer" className="hover:text-sky-400 transition-colors duration-300">
             <FaTwitter />
           </a>
           <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer" className="hover:text-blue-500 transition-colors duration-300">
