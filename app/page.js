@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <div className="animate-fadeIn">
       <Head>
-        <title>SkillXChange - Exchange Knowledge, Empower Yourself</title>
+        <title>SkillXchange - Exchange Knowledge, Empower Yourself</title>
         <meta name="description" content="SkillXchange - Your modern chat application" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -81,7 +81,7 @@ export default function Home() {
               Group <span className="text-indigo-600">Discussion</span>
             </h2>
             <p className="text-lg text-gray-600 leading-relaxed">
-              SkillXChange connects you with real learners and mentors for live.group discussions collaborative environment designed to accelerate growth.
+              SkillXChange connects you with real learners and mentors for live. Group discussions collaborative environment designed to accelerate growth.
             </p>
             <Link href="/forums">
               <button className="mt-8 inline-flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-full shadow-lg transition-transform duration-300 transform hover:scale-105">

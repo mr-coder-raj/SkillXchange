@@ -47,7 +47,7 @@ const ChatForum = ({ clerkUser, slug }) => {
     if (!client) return <div>Setting up client & connection...</div>;
 
     return (
-        <div className='max-h-[90vh] pt-20 '>
+        <div className='max-h-[90vh] md:pt-20 pt-24'>
             <Chat client={client}>
                 <Channel channel={channel}>
                     <div className='h-[90vh] w-full'>
